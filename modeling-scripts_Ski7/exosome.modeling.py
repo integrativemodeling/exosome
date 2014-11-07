@@ -50,8 +50,7 @@ domains=[("Dis3",  "Dis3_1",     0.0,     datadirectory+"exosome.fasta", "Dis3",
          ("Rrp46_gfp", "Rrp46_1",  0.8,   datadirectory+"exosome.fasta", "Rrp46_gfp", datadirectory+"4IFD.pdb", "D",  (1,246,0),     None,               5,       0,         [0],     0,                None,            None),
          ("Rrp46_gfp", "Rrp46_2",  1.0,   datadirectory+"exosome.fasta", "Rrp46_gfp", datadirectory+"GFP_1GFL.pdb", "A",  (1,229,246),     None,         5,       5,         [5],     0,                None,            None),
          ("Rrp43", "Rrp43",      0.9,     datadirectory+"exosome.fasta", "Rrp43", datadirectory+"4IFD.pdb", "C",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None),
-         ("Ski7",  "Ski7",       0.65,    datadirectory+"exosome.fasta", "Ski7",  datadirectory+"Ski7_3izq_modeller_vmd.pdb", "X",  (1,-1),    None,     5,       2,         [2],     0,                None,            None),              
-         ("MPP6",  "MPP6",       0.55,    datadirectory+"exosome.fasta", "Mpp6",  None,                     " ",  (1,-1,0),     None,                    5,       3,         [3],     0,                None,            None)]
+         ("Ski7",  "Ski7",       0.65,    datadirectory+"exosome.fasta", "Ski7",  datadirectory+"Ski7_3izq_modeller_vmd.pdb", "X",  (1,-1),    None,     5,       2,         [2],     0,                None,            None)]              
 
 
 
@@ -130,7 +129,7 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     replica_exchange_maximum_temperature=2.5,
                                     number_of_best_scoring_models=500,
                                     monte_carlo_steps=10,
-                                    number_of_frames=500,
+                                    number_of_frames=50000,
                                     write_initial_rmf=True,
                                     initial_rmf_name_suffix="initial",
                                     stat_file_name_suffix="stat",
