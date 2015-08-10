@@ -1,1 +1,0 @@
-~/imp-projects/imp-270314/imp-fast-mpi/setup_environment.sh python ~/imp-projects/imp-270314/imp/modules/isd_emxl/bin/create_gmm.py ../emd_1438_endogenous_noDis3.map.mrc 50 ../emd_1438_endogenous_noDis3.map.mrc.gmm.50.txt -s 0.002 -m ../emd_1438_endogenous_noDis3.map.mrc.gmm.50.mrc  -a 4 -i 200
