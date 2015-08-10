@@ -70,3 +70,6 @@ Questions, comments, issues
 
 Post your comments in the github issues 
 
+## Information
+
+_Last known good IMP version_: [![build info](https://integrativemodeling.org/systems/?sysstat=17&branch=master)](http://integrativemodeling.org/systems/) [![build info](https://integrativemodeling.org/systems/?sysstat=17&branch=develop)](http://integrativemodeling.org/systems/)
