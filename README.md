@@ -52,6 +52,8 @@ Tu run the modeling script, access: `sampling/modeling` and then run with 64 thr
 
 `metadata`   files needed for the repository
 
+`test` files needed to run tests
+
 
 #Content of the `modeling-scripts*` directories:
 
