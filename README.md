@@ -1,12 +1,15 @@
 ##Content of this IMP application repository:
 
-This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the S.cerevisiae exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and homology models. The whole description of the project and the modeling procedure can be found in:
+This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the S.cerevisiae exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and homology models. 
+
+The whole description of the project and the modeling procedure can be found in:
 
 A strategy for dissecting the architectures of endogenous macromolecular assemblies
 
 Yi Shi, Riccardo Pellarin, Peter C. Fridy, Javier Fernandez-Martinez, Mary K. Thompson, Yinyin Li, Qing Jun Wang, Andrej Sali, Michael P. Rout, and Brian T. Chait.
 
-
+##Displaying the models
+To display the models and the localization densities using UCSF chimera access `./Rrp6.analysis/kmeans_weight_500_2/cluster.1/` or `./Ski7.analysis/kmeans_weight_500_2/cluster.1/` and run `chimera chimera.session.py`
 
 ##Compatibility:
 
@@ -47,6 +50,8 @@ Tu run the modeling script, access: `sampling/modeling` and then run with 64 thr
 
 `data`		  cross-linking data, fasta files, pdbs needed for the calculation
 
+`metadata`   files needed for the repository
+
 
 #`modeling-scripts*` directories:
 
@@ -68,35 +73,38 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 #`*.analysis` directories:
 
-to display the models in chimera access 
 
-./Rrp6.analysis/kmeans_weight_500_2/cluster.1/
 
-or 
+#Content of directories:
 
-./Ski7.analysis/kmeans_weight_500_2/cluster.1/
+`clustering.py`: clustering script
 
-and run `chimera chimera.session.py`
+`kmeans_weight_500_2`: the set of 500 best scoring models collected in two clusters
 
-content of directories:
+`precision_rmsf.py`: calculate the precision of clusters, their mutual distance and the RMSF
 
-                `clustering.py`: clustering script
-                `kmeans_weight_500_2`: the set of 500 best scoring models collected in two clusters
-                `precision_rmsf.py`: calculate the precision of clusters, their mutual distance and the RMSF
-                `XL_table.py`: calculate the contact map and the cross-link map
+`XL_table.py`: calculate the contact map and the cross-link map
 
-                        `cluster.0`: data for cluster 1
-                        `cluster.1`: data for cluster 2
-                        `precision.0.0.out`,`precision.0.1.out`,... : files containing the precision of a cluster (i.e., the files with the same indexes, `precision.i.i.out`, e.g., `precision.0.0.out`) and the files containing the distance between the clusters (i.e., files with different indexes, `precision.i.j.out`).
+`cluster.0`: data for cluster 1
 
-                        **content of `cluster.*` directories**
+`cluster.1`: data for cluster 2
 
-                                `0.pdb`,`1.pdb`,`2.pdb`....: the pdb files of the solutions
-                                `0.rmf3`,`1.rmf3`,`2.rmf3`,...: the rmf files of the solution (can be opened with UCSF Chimera)
-                                `rmsf.Ski7.dat`,`rmsf.Rrp6.dat`,...: text file of the RMSF analysis
-                                `rmsf.Ski7.pdf`,`rmsf.Rrp6.pdf`,...: pdf file of the RMSF analysis
-                                `chimera_session.py`: chimera session file to display the localization densities
-                                `stat.out`: stat file containing all relevant information on the score, etc.
-                                `XL_table_tail.pdf`: pdf file of the cross-link map for the complex
+`precision.0.0.out`,`precision.0.1.out`,... : files containing the precision of a cluster (i.e., the files with the same indexes, `precision.i.i.out`, e.g., `precision.0.0.out`) and the files containing the distance between the clusters (i.e., files with different indexes, `precision.i.j.out`).
+
+#Content of `cluster.*` directories**
+
+`0.pdb`,`1.pdb`,`2.pdb`....: the pdb files of the solutions
+
+`0.rmf3`,`1.rmf3`,`2.rmf3`,...: the rmf files of the solution (can be opened with UCSF Chimera)
+
+`rmsf.Ski7.dat`,`rmsf.Rrp6.dat`,...: text file of the RMSF analysis
+
+`rmsf.Ski7.pdf`,`rmsf.Rrp6.pdf`,...: pdf file of the RMSF analysis
+
+`chimera_session.py`: chimera session file to display the localization densities
+
+`stat.out`: stat file containing all relevant information on the score, etc.
+
+`XL_table_tail.pdf`: pdf file of the cross-link map for the complex
 
 
