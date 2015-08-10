@@ -1,50 +1,59 @@
-Compatibility:
+##Compatibility:
 
-        The scripts are running safely with 
-        `IMP.pmi` git hash  `61b7834aa9fac2960641415b4c90651e7015a048`
-        `IMP` git hash `38754464b774041e315fbae1820183f4ccc29106`.
+The scripts are running safely with `IMP.pmi` git hash  `61b7834aa9fac2960641415b4c90651e7015a048`, `IMP` git hash `38754464b774041e315fbae1820183f4ccc29106`.
 
 
 ## Running the modeling script:
 
-        For more details on how to install imp, run the modeling scripts and analyse the results using IMP and IMP.pmi see the tutorial 
+For more details on how to install imp, run the modeling scripts and analyse the results using IMP and IMP.pmi see the tutorial 
 
-        http://integrativemodeling.org/nightly/doc/tutorial/rnapolii_stalk.html
+http://integrativemodeling.org/systems/tutorial
 
-        In brief, to use the Replica Exchange, IMP must be compiled using an openmpi c++ compiler. We suggest to compile openmpi with the --disable-dlopen flag.
-        See IMP building instructions in: https://integrativemodeling.org/nightly/doc/html/installation.html
+In brief, to use the Replica Exchange, IMP must be compiled using an openmpi c++ compiler. We suggest to compile openmpi with the `--disable-dlopen` flag.
 
-        Tu run the modeling script, access:
+See IMP building instructions in: https://integrativemodeling.org/nightly/doc/html/installation.html
 
-        sampling/modeling
+Tu run the modeling script, access: `sampling/modeling` and then run with 64 threads (64 replicas):
 
-        and then run with 64 threads (64 replicas):
-
-        mpirun -np 64 imp_build_directory/setup_environment.sh python modeling.py
+``mpirun -np 64 imp_build_directory/setup_environment.sh python modeling.py``
 
 
 ## Content of the directories:
 
 
-modeling-scripts_Rrp6.1     modeling scripts and output modeling data for exo10+Rrp6 (first calculation)
-modeling-scripts_Rrp6.2     modeling scripts and output modeling data for exo10+Rrp6 (second calculation)
-modeling-scripts_Ski7.1     modeling scripts and output modeling data for exo10+Ski7 (first calculation)
-modeling-scripts_Ski7.2     modeling scripts and output modeling data for exo10+Ski7 (second calculation)
-README.txt
-Rrp6.analysis     analysis for exo10+Rrp6
-Ski7.analysis     analysis for exo10+Ski7
-data		  cross-linking data, fasta files, pdbs needed for the calculation
+`modeling-scripts_Rrp6.1`     modeling scripts and output modeling data for exo10+Rrp6 complex (first calculation)
+
+`modeling-scripts_Rrp6.2`     modeling scripts and output modeling data for exo10+Rrp6 complex (second calculation)
+
+`modeling-scripts_Ski7.1`     modeling scripts and output modeling data for exo10+Ski7 complex (first calculation)
+
+`modeling-scripts_Ski7.2`     modeling scripts and output modeling data for exo10+Ski7 complex (second calculation)
+
+`README.md`
+
+`Rrp6.analysis`     analysis for exo10+Rrp6 complex
+
+`Ski7.analysis`     analysis for exo10+Ski7 complex
+
+`data`		  cross-linking data, fasta files, pdbs needed for the calculation
 
 
 #`modeling-scripts*` directories:
 
-exosome.modeling.py   		modeling script (see above)
-job.sh 		      		computer-cluster submission script (for UCSF QB3 cluster)
-output		      		all output data
-output/pdbs           		best scoring 500 pdb files
-output/rmfs           		rmf files for each replica
-output/stat.*.out     		stat files containing modeling data (the index is the index of replica). To be read using IMP_source/modules/pmi/pyext/src/process_output.py
-output/stat_replica.*.out     	stat files containing replica exchange data. To be read using IMP_source/modules/pmi/pyext/src/process_output.py
+`exosome.modeling.py`   		modeling script (see above)
+
+`job.sh` 		      		computer-cluster submission script (for UCSF QB3 cluster)
+
+`output`		      		all output data
+
+`output/pdbs`           		best scoring 500 pdb files
+
+`output/rmfs`           		rmf files for each replica
+
+`output/stat.*.out`     		stat files containing modeling data (the index is the index of replica). To be read 
+using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
+
+`output/stat_replica.*.out`     	stat files containing replica exchange data. To be read using `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 
 #`*.analysis` directories:
