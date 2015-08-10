@@ -1,0 +1,6 @@
+title: Exosome modeling
+tags: [PMI]
+prereqs: []
+test:
+    runtime: 24h
+    build: debug
