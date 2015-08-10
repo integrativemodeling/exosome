@@ -1,4 +1,4 @@
-##Content of this IMP application repository:
+##Modeling exosome complexes from cross-link MS data:
 
 This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the S.cerevisiae exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and homology models. 
 
