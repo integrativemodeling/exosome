@@ -52,6 +52,8 @@ Tu run the modeling script, access: `sampling/modeling` and then run with 64 thr
 
 `metadata`   files needed for the repository
 
+`test` files needed to run tests
+
 
 #Content of the `modeling-scripts*` directories:
 
@@ -103,4 +105,7 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 `XL_table_tail.pdf`: pdf file of the cross-link map for the complex
 
+##How to test the scripts
+
+To test the scripts, run `imp_build_directory/setup_environment.sh python test.Rrp6.py` and `imp_build_directory/setup_environment.sh python test.Ski7.py`. An absence of error indicates that the test reproduces all score values, so test is passed.
 
