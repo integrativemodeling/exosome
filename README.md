@@ -53,7 +53,7 @@ Tu run the modeling script, access: `sampling/modeling` and then run with 64 thr
 `test` files needed to run tests
 
 
-#Content of the `modeling-scripts*` directories:
+## Content of the `modeling-scripts*` directories:
 
 `exosome.modeling.py`   		modeling script (see above)
 
@@ -71,8 +71,8 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 `output/stat_replica.*.out`     	stat files containing replica exchange data. To be read using `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 
-#Content of the `*.analysis` directories:
-
+## Content of the `*.analysis` directories:
+ 
 `clustering.py`: clustering script
 
 `kmeans_weight_500_2`: the set of 500 best scoring models collected in two clusters
@@ -87,7 +87,7 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 `precision.0.0.out`,`precision.0.1.out`,... : files containing the precision of a cluster (i.e., the files with the same indexes, `precision.i.i.out`, e.g., `precision.0.0.out`) and the files containing the distance between the clusters (i.e., files with different indexes, `precision.i.j.out`).
 
-#Content of the `*.analysis/cluster.*` directories
+## Content of the `*.analysis/cluster.*` directories
 
 `0.pdb`,`1.pdb`,`2.pdb`....: the pdb files of the solutions
 
@@ -103,7 +103,7 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 `XL_table_tail.pdf`: pdf file of the cross-link map for the complex
 
-##How to test the scripts
+## How to test the scripts
 
 To test the scripts, run `imp_build_directory/setup_environment.sh python test.Rrp6.py` and `imp_build_directory/setup_environment.sh python test.Ski7.py`. An absence of error indicates that the test reproduces all score values, so test is passed.
 
