@@ -2,7 +2,7 @@
 
 This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the S.cerevisiae exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and homology models. 
 
-The whole description of the project and the modeling procedure can be found in:
+The complete description of the project and the modeling procedure can be found in:
 
 A strategy for dissecting the architectures of endogenous macromolecular assemblies
 
@@ -53,7 +53,7 @@ Tu run the modeling script, access: `sampling/modeling` and then run with 64 thr
 `metadata`   files needed for the repository
 
 
-#`modeling-scripts*` directories:
+#Content of the `modeling-scripts*` directories:
 
 `exosome.modeling.py`   		modeling script (see above)
 
@@ -71,11 +71,7 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 `output/stat_replica.*.out`     	stat files containing replica exchange data. To be read using `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 
-#`*.analysis` directories:
-
-
-
-#Content of directories:
+#Content of the `*.analysis` directories:
 
 `clustering.py`: clustering script
 
@@ -91,7 +87,7 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 `precision.0.0.out`,`precision.0.1.out`,... : files containing the precision of a cluster (i.e., the files with the same indexes, `precision.i.i.out`, e.g., `precision.0.0.out`) and the files containing the distance between the clusters (i.e., files with different indexes, `precision.i.j.out`).
 
-#Content of `cluster.*` directories**
+#Content of the `*.analysis/cluster.*` directories
 
 `0.pdb`,`1.pdb`,`2.pdb`....: the pdb files of the solutions
 
