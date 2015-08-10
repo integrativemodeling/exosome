@@ -42,7 +42,7 @@ Tu run the modeling script, access: `sampling/modeling` and then run with 64 thr
 
 `modeling-scripts_Ski7.2`     modeling scripts and output modeling data for exo10+Ski7 complex (second calculation)
 
-`README.md`
+`README.md` this readme file
 
 `Rrp6.analysis`     analysis for exo10+Rrp6 complex
 
