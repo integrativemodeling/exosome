@@ -56,13 +56,8 @@ domains=[("Dis3",  "Dis3_1",     0.0,     datadirectory+"exosome.fasta", "Dis3",
 
 
 bm1=IMP.pmi.macros.BuildModel1(simo)
-bm1.build_model(domains)
+bm1.build_model(domains,rmf_file="../Ski7.analysis/kmeans_weight_500_2/cluster.1/0.rmf3",rmf_frame_number=0)
 resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
-
-
-# randomize the initial configuration
-
-simo.shuffle_configuration(100)
 
 # defines the movers
 
@@ -113,34 +108,7 @@ psi=xl1.get_psi(1.0)[0]
 psi.set_scale(0.05)
 
 
-# sampling
-
-
-
-simo.optimize_floppy_bodies(100)
-
-mc1=IMP.pmi.macros.ReplicaExchange0(m,
-                                    simo,
-                                    monte_carlo_sample_objects=sampleobjects,
-                                    output_objects=outputobjects,
-                                    crosslink_restraints=[xl1],
-                                    monte_carlo_temperature=1.0,
-                                    replica_exchange_minimum_temperature=1.0,
-                                    replica_exchange_maximum_temperature=2.5,
-                                    number_of_best_scoring_models=500,
-                                    monte_carlo_steps=10,
-                                    number_of_frames=50000,
-                                    write_initial_rmf=True,
-                                    initial_rmf_name_suffix="initial",
-                                    stat_file_name_suffix="stat",
-                                    best_pdb_name_suffix="model",
-                                    do_clean_first=True,
-                                    do_create_directories=True,
-                                    global_output_directory="output",
-                                    rmf_dir="rmfs/",
-                                    best_pdb_dir="pdbs/",
-                                    replica_stat_file_suffix="stat_replica")
-mc1.execute_macro()
-
-
+o=IMP.pmi.output.Output()
+#o.write_test("test.Ski7.out",[simo,xl1,ev])
+o.test("test.Ski7.out",[simo,xl1,ev])
 

@@ -1,6 +1,6 @@
 title: Exosome modeling
-tags: [PMI]
+tags: [PMI][chemical crosslinks][X-ray][endogenous complex]
 prereqs: []
 test:
-    runtime: 24h
-    build: debug
+    runtime: >24h
+    build: fast

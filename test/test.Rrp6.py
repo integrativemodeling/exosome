@@ -50,19 +50,18 @@ domains=[("Dis3",  "Dis3_1",     0.0,     datadirectory+"exosome.fasta", "Dis3",
          ("Rrp46_gfp", "Rrp46_1",  0.8,   datadirectory+"exosome.fasta", "Rrp46_gfp", datadirectory+"4IFD.pdb", "D",  (1,246,0),     None,               5,       0,         [0],     0,                None,            None, None),
          ("Rrp46_gfp", "Rrp46_2",  1.0,   datadirectory+"exosome.fasta", "Rrp46_gfp", datadirectory+"GFP_1GFL.pdb", "A",  (1,229,246),     None,         5,       5,         [5],     0,                None,            None, None),
          ("Rrp43", "Rrp43",      0.9,     datadirectory+"exosome.fasta", "Rrp43", datadirectory+"4IFD.pdb", "C",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None, None),
-         ("Ski7",  "Ski7",       0.65,    datadirectory+"exosome.fasta", "Ski7",  datadirectory+"Ski7_3izq_modeller_vmd.pdb", "X",  (1,-1),    None,     5,       2,         [2],     0,                None,            None, None)]              
+         ("Lrp1",  "Lrp1",       1.0,     datadirectory+"exosome.fasta", "Lrp1",  None                    , " ",  (1,-1,0),     None,                    5,       1,         [1],     0,                None,            None, None),
+         ("Rrp6",  "Rrp6_1",     0.65,    datadirectory+"exosome.fasta", "Rrp6",  datadirectory+"2HBJ.pdb", "A",  (1,526,0),    None,                    5,       2,         [2],     0,                None,            None, None),
+         ("Rrp6",  "Rrp6_2",     0.65,    datadirectory+"exosome.fasta", "Rrp6",  datadirectory+"4IFD.pdb", "K",  (527,733,0),  None,                    5,       0,         [0],     0,                None,            None, None),
+         ("MPP6",  "MPP6",       0.55,    datadirectory+"exosome.fasta", "Mpp6",  None,                     " ",  (1,-1,0),     None,                    5,       3,         [3],     0,                None,            None, None)]
 
 
 
 
 bm1=IMP.pmi.macros.BuildModel1(simo)
-bm1.build_model(domains)
+bm1.build_model(domains,rmf_file="../Rrp6.analysis/kmeans_weight_500_2/cluster.1/0.rmf3",rmf_frame_number=0)
 resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
 
-
-# randomize the initial configuration
-
-simo.shuffle_configuration(100)
 
 # defines the movers
 
@@ -113,34 +112,10 @@ psi=xl1.get_psi(1.0)[0]
 psi.set_scale(0.05)
 
 
-# sampling
+# testing
 
-
-
-simo.optimize_floppy_bodies(100)
-
-mc1=IMP.pmi.macros.ReplicaExchange0(m,
-                                    simo,
-                                    monte_carlo_sample_objects=sampleobjects,
-                                    output_objects=outputobjects,
-                                    crosslink_restraints=[xl1],
-                                    monte_carlo_temperature=1.0,
-                                    replica_exchange_minimum_temperature=1.0,
-                                    replica_exchange_maximum_temperature=2.5,
-                                    number_of_best_scoring_models=500,
-                                    monte_carlo_steps=10,
-                                    number_of_frames=50000,
-                                    write_initial_rmf=True,
-                                    initial_rmf_name_suffix="initial",
-                                    stat_file_name_suffix="stat",
-                                    best_pdb_name_suffix="model",
-                                    do_clean_first=True,
-                                    do_create_directories=True,
-                                    global_output_directory="output",
-                                    rmf_dir="rmfs/",
-                                    best_pdb_dir="pdbs/",
-                                    replica_stat_file_suffix="stat_replica")
-mc1.execute_macro()
-
+o=IMP.pmi.output.Output()
+#o.write_test("test.Rrp6.out",[simo,xl1,ev])
+o.test("test.Rrp6.out",[simo,xl1,ev])
 
 
