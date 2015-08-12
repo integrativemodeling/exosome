@@ -1,5 +1,5 @@
 import sys
-sys.path.append('/veena1/home/pellarin/imp-projects/XL_analysis/src/')
+sys.path.append('../libraries/XL_analysis/src/')
 import xltable
 import glob
 
