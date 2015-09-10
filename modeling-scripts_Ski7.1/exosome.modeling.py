@@ -15,6 +15,7 @@ import IMP.pmi.output
 import IMP.pmi.macros
 
 import os
+import sys
 
 # setting up parameters
 
@@ -118,6 +119,8 @@ psi.set_scale(0.05)
 
 simo.optimize_floppy_bodies(100)
 
+nframes=50000
+if '--test' in sys.argv: nframes=500
 mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     simo,
                                     monte_carlo_sample_objects=sampleobjects,
@@ -128,7 +131,7 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     replica_exchange_maximum_temperature=2.5,
                                     number_of_best_scoring_models=500,
                                     monte_carlo_steps=10,
-                                    number_of_frames=50000,
+                                    number_of_frames=nframes,
                                     write_initial_rmf=True,
                                     initial_rmf_name_suffix="initial",
                                     stat_file_name_suffix="stat",
