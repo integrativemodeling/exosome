@@ -6,7 +6,6 @@ import IMP.atom
 import glob
 import itertools
 
-is_mpi=False
 test_mode=False  # runs on the first 10 structures to test if it runs smoothly
 
 # specify the cluster directory to be analysed
@@ -72,7 +71,7 @@ pr=IMP.pmi.analysis.Precision(model,'one',selection_dictionary=selection_diction
 pr.set_precision_style('pairwise_rmsd')
 
 for n in range(len(rmfs)):
-    pr.add_structures(zip(rmfs[n],frames[n]),clusterdirectories[n],is_mpi=is_mpi)
+    pr.add_structures(zip(rmfs[n],frames[n]),clusterdirectories[n])
 
 
 #for pair in itertools.product(range(len(rmfs)), repeat=2):
@@ -80,8 +79,7 @@ for n in range(len(rmfs)):
 #    clus2=pair[1]
 #    pr.get_precision(root_cluster_directory+"/precision."+str(clus1)+"."+str(clus2)+".out",
 #                     clusterdirectories[clus1],
-#                     clusterdirectories[clus2],
-#                     is_mpi=is_mpi,skip=1)
+#                     clusterdirectories[clus2],skip=1)
 
 for n in range(len(rmfs)):
-    pr.get_rmsf(clusterdirectories[n],clusterdirectories[n]+"/",is_mpi=is_mpi,skip=1)
+    pr.get_rmsf(clusterdirectories[n],clusterdirectories[n]+"/",skip=1)
