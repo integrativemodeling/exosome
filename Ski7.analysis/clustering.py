@@ -13,8 +13,7 @@ mc=IMP.pmi.macros.AnalysisReplicaExchange0(model,
                                         "../modeling-scripts_Ski7.1/",
 					"../modeling-scripts_Ski7.2/"
         				],
-                                        global_output_directory="./output/", # don't change
-                                        rmf_dir="rmfs/")  # don't change
+                                        global_output_directory="./output/") # don't change
 
 
 
