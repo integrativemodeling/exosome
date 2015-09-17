@@ -26,12 +26,12 @@ class Tests(unittest.TestCase):
         os.chdir(os.path.join(TOPDIR, 'Ski7.analysis'))
         self.run_analysis_script()
 
-    def run_modeling_script(self)
+    def run_modeling_script(self):
         """Run IMP modeling"""
         p = subprocess.check_call(["python", 'exosome.modeling.py', "--test"])
         # todo: assert outputs
 
-    def run_analysis_script(self)
+    def run_analysis_script(self):
         """Run IMP analysis"""
         p = subprocess.check_call(["python", 'clustering.py'])
         p = subprocess.check_call(["python", 'precision_rmsf.py', "--test"])
