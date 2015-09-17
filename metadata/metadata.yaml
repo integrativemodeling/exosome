@@ -3,4 +3,4 @@ tags: [PMI, chemical crosslinks, X-ray, endogenous complex]
 prereqs: []
 test:
     runtime: 24h
-    build: fast
+    build: release
