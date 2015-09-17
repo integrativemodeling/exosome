@@ -5,8 +5,9 @@ import IMP.pmi.output
 import IMP.atom
 import glob
 import itertools
+import sys
 
-test_mode=False  # runs on the first 10 structures to test if it runs smoothly
+test_mode='--test' in sys.argv # runs on the first 10 structures to test if it runs smoothly
 
 # specify the cluster directory to be analysed
 
