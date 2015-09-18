@@ -121,7 +121,7 @@ psi.set_scale(0.05)
 simo.optimize_floppy_bodies(100)
 
 nframes=50000
-if '--test' in sys.argv: nframes=500
+if '--test' in sys.argv: nframes=2000
 mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     simo,
                                     monte_carlo_sample_objects=sampleobjects,
