@@ -4,6 +4,7 @@ import unittest
 import os
 import sys
 import subprocess
+import shutil
 
 TOPDIR = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), '..'))
 
@@ -28,6 +29,8 @@ class Tests(unittest.TestCase):
 
     def run_modeling_script(self):
         """Run IMP modeling"""
+        # clean pregenerated outputs
+        shutil.rmtree('output')
         p = subprocess.check_call(["python", 'exosome.modeling.py', "--test"])
         # todo: assert outputs
 
