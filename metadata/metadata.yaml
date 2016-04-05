@@ -1,6 +1,6 @@
 title: Exosome modeling
 tags: [PMI, chemical crosslinks, X-ray, endogenous complex]
-prereqs: [python/scikit, python/matplotlib, python/biopython]
+prereqs: [python/scikit, python/matplotlib]
 pmid: 26436480
 test:
     runtime: 48h
