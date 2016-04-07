@@ -1,33 +1,17 @@
-This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the S.cerevisiae exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and homology models. 
-
-The complete description of the project and the modeling procedure can be found in:
-
-A strategy for dissecting the architectures of endogenous macromolecular assemblies
-
-Yi Shi, Riccardo Pellarin, Peter C. Fridy, Javier Fernandez-Martinez, Mary K. Thompson, Yinyin Li, Qing Jun Wang, Andrej Sali, Michael P. Rout, and Brian T. Chait.
+This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the *S.cerevisiae* exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and comparative models. 
 
 ##Displaying the models
 To display the models and the localization densities using UCSF chimera access `./Rrp6.analysis/kmeans_weight_500_2/cluster.1/` or `./Ski7.analysis/kmeans_weight_500_2/cluster.1/` and run `chimera chimera.session.py`
 
-##Compatibility:
-
-The scripts are running safely with `IMP.pmi` git hash  `61b7834aa9fac2960641415b4c90651e7015a048`, `IMP` git hash `38754464b774041e315fbae1820183f4ccc29106`.
-
-
 ## Running the modeling script:
 
-For more details on how to install imp, run the modeling scripts and analyse the results using IMP and IMP.pmi see the tutorial 
+For more details on how to install IMP, run the modeling scripts and analyse the results using IMP and IMP.pmi see the
+[IMP tutorial](https://integrativemodeling.org/2.6.0/doc/manual/rnapolii_stalk.html)
 
-http://integrativemodeling.org/systems/tutorial
+To run the modeling script, access: `sampling/modeling` and then run with:
+`python modeling.py`
 
-In brief, to use the Replica Exchange, IMP must be compiled using an openmpi c++ compiler. We suggest to compile openmpi with the `--disable-dlopen` flag.
-
-See IMP building instructions in: https://integrativemodeling.org/nightly/doc/html/installation.html
-
-Tu run the modeling script, access: `sampling/modeling` and then run with 64 threads (64 replicas):
-
-``mpirun -np 64 imp_build_directory/setup_environment.sh python modeling.py``
-
+We recommend building IMP with MPI support, then running the modeling script with 64 replicas by prepending `mpirun -np 64` to the above command.
 
 ## Content of the directories:
 
@@ -103,7 +87,19 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 `XL_table_tail.pdf`: pdf file of the cross-link map for the complex
 
-## How to test the scripts
+## Information
 
-To test the scripts, run `imp_build_directory/setup_environment.sh python test.Rrp6.py` and `imp_build_directory/setup_environment.sh python test.Ski7.py`. An absence of error indicates that the test reproduces all score values, so test is passed.
+_License_: [LGPL](http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html).
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2 of the License, or (at your option) any later version.
 
+_Last known good IMP version_: [![build info](https://integrativemodeling.org/systems/?sysstat=17&branch=master)](https://integrativemodeling.org/systems/) [![build info](https://integrativemodeling.org/systems/?sysstat=17&branch=develop)](https://integrativemodeling.org/systems/)
+
+_Testable_: Yes.
+
+_Parallelizeable_: Yes
+
+_Publications_:
+ - Y. Shi, R. Pellarin, P. Fridy, J. Fernandez-Martinez, M. Thompson, Y. Li, Q.J. Wang, A. Sali, M. Rout, B. Chait. [A strategy for dissecting the architectures of native macromolecular assemblies](https://www.ncbi.nlm.nih.gov/pubmed/26436480), Nat Methods 12, 1135-8, 2015.
