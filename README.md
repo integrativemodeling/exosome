@@ -6,9 +6,10 @@ To display the models and the localization densities using UCSF chimera access `
 ## Running the modeling script:
 
 For more details on how to install IMP, run the modeling scripts and analyse the results using IMP and IMP.pmi see the
-[IMP tutorial](https://integrativemodeling.org/2.6.0/doc/manual/rnapolii_stalk.html)
+[IMP tutorial](https://integrativemodeling.org/2.6.0/doc/manual/rnapolii_stalk.html).
 
 To run the modeling script, access: `sampling/modeling` and then run with:
+
 `python modeling.py`
 
 We recommend building IMP with MPI support, then running the modeling script with 64 replicas by prepending `mpirun -np 64` to the above command.
