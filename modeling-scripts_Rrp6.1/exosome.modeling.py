@@ -4,6 +4,8 @@ import IMP.algebra
 import IMP.atom
 import IMP.container
 
+import IMP.pmi.mmcif
+import IMP.pmi.metadata
 import IMP.pmi.restraints.crosslinking
 import IMP.pmi.restraints.stereochemistry
 import IMP.pmi.restraints.em
@@ -29,6 +31,20 @@ sampleobjects = []
 
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+
+# We used Phyre2 to generate a model for Ski7
+simo.add_metadata(IMP.pmi.metadata.Software(
+          name='Phyre2', classification='protein homology modeling',
+          description='Protein Homology/analogY Recognition Engine V 2.0',
+          version='2.0',
+          url='http://www.sbg.bio.ic.ac.uk/~phyre2/'))
+
+if '--mmcif' in sys.argv:
+    # Record the modeling protocol to an mmCIF file
+    po = IMP.pmi.mmcif.ProtocolOutput(open('exosome.cif', 'w'))
+    simo.add_protocol_output(po)
+
+simo.dry_run = '--dry-run' in sys.argv
 
 datadirectory="../data/"
 
@@ -61,7 +77,6 @@ domains=[("Dis3",  "Dis3_1",     0.0,     datadirectory+"exosome.fasta", "Dis3",
 bm1=IMP.pmi.macros.BuildModel1(simo)
 bm1.build_model(domains)
 resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
-
 
 # randomize the initial configuration
 
@@ -142,8 +157,9 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     global_output_directory="output",
                                     rmf_dir="rmfs/",
                                     best_pdb_dir="pdbs/",
-                                    replica_stat_file_suffix="stat_replica")
+                                    replica_stat_file_suffix="stat_replica",
+                                    test_mode=simo.dry_run)
 mc1.execute_macro()
 
-
-
+if '--mmcif' in sys.argv:
+    po.flush()
