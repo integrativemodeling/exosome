@@ -38,6 +38,16 @@ simo.add_metadata(IMP.pmi.metadata.Software(
           description='Protein Homology/analogY Recognition Engine V 2.0',
           version='2.0',
           url='http://www.sbg.bio.ic.ac.uk/~phyre2/'))
+simo.add_metadata(IMP.pmi.metadata.Citation(
+          pmid='26436480',
+          title="A strategy for dissecting the architectures of native "
+                "macromolecular assemblies.",
+          journal="Nat Methods", volume=12, page_range=(1135,1138),
+          year=2015,
+          authors=['Shi Y', 'Pellarin R', 'Fridy PC', 'Fernandez-Martinez J',
+                   'Thompson MK', 'Li Y', 'Wang QJ', 'Sali A', 'Rout MP',
+                   'Chait BT'],
+          doi='10.1038/nmeth.3617'))
 
 if '--mmcif' in sys.argv:
     # Record the modeling protocol to an mmCIF file
