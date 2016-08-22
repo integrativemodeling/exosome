@@ -177,4 +177,8 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
 mc1.execute_macro()
 
 if '--mmcif' in sys.argv:
+    # Add clustering info to the mmCIF file
+    os.chdir('../Rrp6.analysis')
+    with open('clustering.py') as fh:
+        exec(fh.read())
     po.flush()

@@ -14,11 +14,10 @@ mc=IMP.pmi.macros.AnalysisReplicaExchange0(model,
 					"../modeling-scripts_Rrp6.2/"
         				],
                                         global_output_directory="./output/") # don't change
-
-
-
-
-
+if '--mmcif' in sys.argv:
+    mc.test_mode = simo.dry_run
+    for po in simo.protocol_output:
+        mc.add_protocol_output(po)
 
 # fields that have to be extracted for the stat file
 
