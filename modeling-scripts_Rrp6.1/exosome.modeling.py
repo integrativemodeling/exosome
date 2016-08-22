@@ -88,6 +88,11 @@ bm1=IMP.pmi.macros.BuildModel1(simo)
 bm1.build_model(domains)
 resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
 
+# Add components that we didn't model but which we have experimental data
+# (crosslinks) for. This helps us to interpret the crosslinks file later.
+simo.create_non_modeled_component('RPL3')
+simo.add_component_sequence('RPL3', datadirectory+"exosome.fasta")
+
 # randomize the initial configuration
 
 simo.shuffle_configuration(100)
