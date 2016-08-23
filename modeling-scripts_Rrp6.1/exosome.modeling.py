@@ -48,6 +48,8 @@ simo.add_metadata(IMP.pmi.metadata.Citation(
                    'Thompson MK', 'Li Y', 'Wang QJ', 'Sali A', 'Rout MP',
                    'Chait BT'],
           doi='10.1038/nmeth.3617'))
+simo.add_metadata(IMP.pmi.metadata.Repository(
+          doi="10.5281/zenodo.60731", root=".."))
 
 if '--mmcif' in sys.argv:
     # Record the modeling protocol to an mmCIF file
