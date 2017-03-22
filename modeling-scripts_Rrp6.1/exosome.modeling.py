@@ -49,7 +49,9 @@ simo.add_metadata(IMP.pmi.metadata.Citation(
                    'Chait BT'],
           doi='10.1038/nmeth.3617'))
 simo.add_metadata(IMP.pmi.metadata.Repository(
-          doi="10.5281/zenodo.60731", root=".."))
+          doi="10.5281/zenodo.60731", root="..",
+          url="https://zenodo.org/record/60731/files/exosome-v1.0.zip",
+          top_directory="exosome-v1.0"))
 
 if '--mmcif' in sys.argv:
     # Record the modeling protocol to an mmCIF file
