@@ -57,5 +57,6 @@ echo "Archiving top level"
 (cd ${ARCHIVE_DIR} && zip -r ${REPO}-${TAG}.zip ${REPO}-${TAG})
 rm -rf ${TOPDIR}
 
+(cd ${ARCHIVE_DIR} && md5sum *.zip)
 echo "zip files created in ${ARCHIVE_DIR}. Upload them and then"
 echo "delete that directory."
