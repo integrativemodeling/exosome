@@ -43,7 +43,9 @@ echo "Extracting all files from ${REPO} at ${TAG}"
           | tar -xf -)
 
 # Put larger directories in their own zipfiles
+zip_subdir modeling-scripts_Ski7.1/output Ski7.1-output.zip
 zip_subdir modeling-scripts_Ski7.2/output Ski7.2-output.zip
+zip_subdir modeling-scripts_Rrp6.1/output Rrp6.1-output.zip
 zip_subdir modeling-scripts_Rrp6.2/output Rrp6.2-output.zip
 zip_subdir Ski7.analysis/kmeans_weight_500_2/cluster.0 Ski7-cluster0.zip
 zip_subdir Ski7.analysis/kmeans_weight_500_2/cluster.1 Ski7-cluster1.zip
