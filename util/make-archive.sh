@@ -28,6 +28,7 @@ zip_subdir() {
 
   BASE=`basename ${SUBDIR}`
   CWD=`pwd`
+  echo "Archiving ${SUBDIR}"
   (cd ${TOPDIR}/${SUBDIR}/.. && zip -r ${CWD}/${ARCHIVE_DIR}/${ZIPNAME} ${BASE})
   rm -rf ${TOPDIR}/${SUBDIR}
   mkdir ${TOPDIR}/${SUBDIR}
@@ -37,8 +38,9 @@ at the same DOI where this archive is available.
 END
 }
 
-git archive --format=tar --prefix=${TOPDIR}/ ${TAG} \
-    | tar -xf -
+echo "Extracting all files from ${REPO} at ${TAG}"
+(cd .. && git archive --format=tar --prefix=util/${TOPDIR}/ ${TAG} \
+          | tar -xf -)
 
 # Put larger directories in their own zipfiles
 zip_subdir modeling-scripts_Ski7.2/output Ski7.2-output.zip
@@ -49,6 +51,7 @@ zip_subdir Rrp6.analysis/kmeans_weight_500_2/cluster.0 Rrp6-cluster0.zip
 zip_subdir Rrp6.analysis/kmeans_weight_500_2/cluster.1 Rrp6-cluster1.zip
 
 # Put everything else in the toplevel zipfile
+echo "Archiving top level"
 (cd ${ARCHIVE_DIR} && zip -r ${REPO}-${TAG}.zip ${REPO}-${TAG})
 rm -rf ${TOPDIR}
 
