@@ -1,5 +1,6 @@
 import IMP
 import IMP.pmi
+import IMP.pmi.metadata
 import IMP.pmi.macros
 import sys
 
@@ -74,16 +75,15 @@ mc.clustering("SimplifiedModel_Total_Score_None",  # don't change, field where t
               density_custom_ranges=reduced_density_dict)    # setup the list of densities to be calculated
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+if '--mmcif' in sys.argv:
+    # Point to deposited ensembles in DCD format
+    dcds = []
+    for i in range(nclusters):
+        r = IMP.pmi.metadata.Repository(doi="10.5281/zenodo.495508",
+             url="https://zenodo.org/record/495508/files/cluster.%d.dcd" % i)
+        dcds.append(IMP.pmi.metadata.FileLocation(path='.', repo=r,
+                            details="All models in cluster %d" % (i+1)))
+    for po in simo.protocol_output:
+        if hasattr(po, 'set_ensemble_file'):
+            for i, dcd in enumerate(dcds):
+                po.set_ensemble_file(i, dcd)
