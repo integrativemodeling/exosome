@@ -3,7 +3,7 @@
 This repository contains the modeling scripts, the ensemble of models, and the results of the analysis for the modeling of the *S.cerevisiae* exosome complex (named exo10, comprising of Rrp40, Rrp4, Csl4, Rrp45, Rrp46, Rrp42, Rrp43, Mtr3, Ski6 and Rrp44), in presence of Ski7 (exo10+Ski7 below) or Rrp6 (exo10+Rrp6 below) proteins. The modeling is performed based on cross-link Mass-Spectrometry data, crystallographic structures, and comparative models. 
 
 ##Displaying the models
-To display the models and the localization densities using UCSF chimera access `./Rrp6.analysis/kmeans_weight_500_2/cluster.1/` or `./Ski7.analysis/kmeans_weight_500_2/cluster.1/` and run `chimera chimera.session.py`
+To display the models and the localization densities using UCSF Chimera access `./Rrp6.analysis/kmeans_weight_500_2/cluster.1/` or `./Ski7.analysis/kmeans_weight_500_2/cluster.1/` and run `chimera chimera.session.py`
 
 ## Running the modeling script:
 
@@ -84,7 +84,7 @@ using the python program `IMP_source/modules/pmi/pyext/src/process_output.py`
 
 `rmsf.Ski7.pdf`,`rmsf.Rrp6.pdf`,...: pdf file of the RMSF analysis
 
-`chimera_session.py`: chimera session file to display the localization densities
+`chimera_session.py`: Chimera session file to display the localization densities
 
 `stat.out`: stat file containing all relevant information on the score, etc.
 
