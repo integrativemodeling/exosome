@@ -49,9 +49,9 @@ simo.add_metadata(IMP.pmi.metadata.Citation(
                    'Chait BT'],
           doi='10.1038/nmeth.3617'))
 simo.add_metadata(IMP.pmi.metadata.Repository(
-          doi="10.5281/zenodo.495508", root="..",
-          url="https://zenodo.org/record/495508/files/exosome-v1.0.zip",
-          top_directory="exosome-v1.0"))
+          doi="10.5281/zenodo.583313", root="..",
+          url="https://zenodo.org/record/583313/files/exosome-v1.0.1.zip",
+          top_directory="exosome-v1.0.1"))
 for path, zipfile in [
         ('modeling-scripts_Ski7.1/output', 'Ski7.1-output.zip'),
         ('modeling-scripts_Ski7.2/output', 'Ski7.2-output.zip'),
@@ -62,8 +62,8 @@ for path, zipfile in [
         ('Rrp6.analysis/kmeans_weight_500_2/cluster.0', 'Rrp6-cluster0.zip'),
         ('Rrp6.analysis/kmeans_weight_500_2/cluster.1', 'Rrp6-cluster1.zip')]:
     simo.add_metadata(IMP.pmi.metadata.Repository(
-          doi="10.5281/zenodo.495508", root="../%s" % path,
-          url="https://zenodo.org/record/495508/files/%s" % zipfile,
+          doi="10.5281/zenodo.583313", root="../%s" % path,
+          url="https://zenodo.org/record/583313/files/%s" % zipfile,
           top_directory=os.path.basename(path)))
 
 if '--mmcif' in sys.argv:
