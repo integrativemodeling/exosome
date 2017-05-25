@@ -1,5 +1,5 @@
-All kmeans_weight_500_2/cluster.1/ kmeans_weight_500_2/cluster.0/ average pairwise distance 352.981081054
-Lrp1 kmeans_weight_500_2/cluster.1/ kmeans_weight_500_2/cluster.0/ average pairwise distance 305.769465917
-Rrp6 kmeans_weight_500_2/cluster.1/ kmeans_weight_500_2/cluster.0/ average pairwise distance 321.285451743
-Rrp46_gfp kmeans_weight_500_2/cluster.1/ kmeans_weight_500_2/cluster.0/ average pairwise distance 352.567208563
-MPP6 kmeans_weight_500_2/cluster.1/ kmeans_weight_500_2/cluster.0/ average pairwise distance 372.69023842
+All kmeans_weight_500_2/cluster.0/ kmeans_weight_500_2/cluster.1/ average pairwise distance 352.981081054
+Lrp1 kmeans_weight_500_2/cluster.0/ kmeans_weight_500_2/cluster.1/ average pairwise distance 305.769465917
+Rrp6 kmeans_weight_500_2/cluster.0/ kmeans_weight_500_2/cluster.1/ average pairwise distance 321.285451743
+Rrp46_gfp kmeans_weight_500_2/cluster.0/ kmeans_weight_500_2/cluster.1/ average pairwise distance 352.567208563
+MPP6 kmeans_weight_500_2/cluster.0/ kmeans_weight_500_2/cluster.1/ average pairwise distance 372.69023842

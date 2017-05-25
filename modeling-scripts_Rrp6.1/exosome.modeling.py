@@ -4,6 +4,8 @@ import IMP.algebra
 import IMP.atom
 import IMP.container
 
+import IMP.pmi.mmcif
+import IMP.pmi.metadata
 import IMP.pmi.restraints.crosslinking
 import IMP.pmi.restraints.stereochemistry
 import IMP.pmi.restraints.em
@@ -30,6 +32,47 @@ sampleobjects = []
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
 
+# We used Phyre2 to generate a model for Ski7
+simo.add_metadata(IMP.pmi.metadata.Software(
+          name='Phyre2', classification='protein homology modeling',
+          description='Protein Homology/analogY Recognition Engine V 2.0',
+          version='2.0',
+          url='http://www.sbg.bio.ic.ac.uk/~phyre2/'))
+simo.add_metadata(IMP.pmi.metadata.Citation(
+          pmid='26436480',
+          title="A strategy for dissecting the architectures of native "
+                "macromolecular assemblies.",
+          journal="Nat Methods", volume=12, page_range=(1135,1138),
+          year=2015,
+          authors=['Shi Y', 'Pellarin R', 'Fridy PC', 'Fernandez-Martinez J',
+                   'Thompson MK', 'Li Y', 'Wang QJ', 'Sali A', 'Rout MP',
+                   'Chait BT'],
+          doi='10.1038/nmeth.3617'))
+simo.add_metadata(IMP.pmi.metadata.Repository(
+          doi="10.5281/zenodo.495508", root="..",
+          url="https://zenodo.org/record/495508/files/exosome-v1.0.zip",
+          top_directory="exosome-v1.0"))
+for path, zipfile in [
+        ('modeling-scripts_Ski7.1/output', 'Ski7.1-output.zip'),
+        ('modeling-scripts_Ski7.2/output', 'Ski7.2-output.zip'),
+        ('modeling-scripts_Rrp6.1/output', 'Rrp6.1-output.zip'),
+        ('modeling-scripts_Rrp6.2/output', 'Rrp6.2-output.zip'),
+        ('Ski7.analysis/kmeans_weight_500_2/cluster.0', 'Ski7-cluster0.zip'),
+        ('Ski7.analysis/kmeans_weight_500_2/cluster.1', 'Ski7-cluster1.zip'),
+        ('Rrp6.analysis/kmeans_weight_500_2/cluster.0', 'Rrp6-cluster0.zip'),
+        ('Rrp6.analysis/kmeans_weight_500_2/cluster.1', 'Rrp6-cluster1.zip')]:
+    simo.add_metadata(IMP.pmi.metadata.Repository(
+          doi="10.5281/zenodo.495508", root="../%s" % path,
+          url="https://zenodo.org/record/495508/files/%s" % zipfile,
+          top_directory=os.path.basename(path)))
+
+if '--mmcif' in sys.argv:
+    # Record the modeling protocol to an mmCIF file
+    po = IMP.pmi.mmcif.ProtocolOutput(open('exosome.cif', 'w'))
+    simo.add_protocol_output(po)
+
+simo.dry_run = '--dry-run' in sys.argv
+
 datadirectory="../data/"
 
 
@@ -46,7 +89,7 @@ domains=[("Dis3",  "Dis3_1",     0.0,     datadirectory+"exosome.fasta", "Dis3",
          ("Rrp40", "Rrp40_1",    0.5,     datadirectory+"exosome.fasta", "Rrp40", datadirectory+"4IFD.pdb", "G",  (1,60,0),     None,                    5,       0,         [0],     0,                None,            None, None),
          ("Rrp40", "Rrp40_2",    0.5,     datadirectory+"exosome.fasta", "Rrp40", datadirectory+"4IFD.pdb", "G",  (61,-1,0),    None,                    5,       0,         [0],     0,                None,            None, None),
          ("Rrp42", "Rrp42",      0.6,     datadirectory+"exosome.fasta", "Rrp42", datadirectory+"4IFD.pdb", "E",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None, None),
-         ("Ski6",  "Ski6",       0.7,     datadirectory+"exosome.fasta", "Rrp42", datadirectory+"4IFD.pdb", "B",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None, None),
+         ("Ski6",  "Ski6",       0.7,     datadirectory+"exosome.fasta", "Ski6", datadirectory+"4IFD.pdb", "B",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None, None),
          ("Rrp46_gfp", "Rrp46_1",  0.8,   datadirectory+"exosome.fasta", "Rrp46_gfp", datadirectory+"4IFD.pdb", "D",  (1,246,0),     None,               5,       0,         [0],     0,                None,            None, None),
          ("Rrp46_gfp", "Rrp46_2",  1.0,   datadirectory+"exosome.fasta", "Rrp46_gfp", datadirectory+"GFP_1GFL.pdb", "A",  (1,229,246),     None,         5,       5,         [5],     0,                None,            None, None),
          ("Rrp43", "Rrp43",      0.9,     datadirectory+"exosome.fasta", "Rrp43", datadirectory+"4IFD.pdb", "C",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None, None),
@@ -62,6 +105,10 @@ bm1=IMP.pmi.macros.BuildModel1(simo)
 bm1.build_model(domains)
 resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
 
+# Add components that we didn't model but which we have experimental data
+# (crosslinks) for. This helps us to interpret the crosslinks file later.
+simo.create_non_modeled_component('RPL3')
+simo.add_component_sequence('RPL3', datadirectory+"exosome.fasta")
 
 # randomize the initial configuration
 
@@ -142,8 +189,16 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     global_output_directory="output",
                                     rmf_dir="rmfs/",
                                     best_pdb_dir="pdbs/",
-                                    replica_stat_file_suffix="stat_replica")
+                                    replica_stat_file_suffix="stat_replica",
+                                    test_mode=simo.dry_run)
 mc1.execute_macro()
 
-
-
+if '--mmcif' in sys.argv:
+    # Add clustering info to the mmCIF file
+    os.chdir('../Rrp6.analysis')
+    loc = IMP.pmi.metadata.FileLocation('clustering.py',
+                              details='Main clustering and analysis script')
+    simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
+    with open('clustering.py') as fh:
+        exec(fh.read())
+    po.flush()
