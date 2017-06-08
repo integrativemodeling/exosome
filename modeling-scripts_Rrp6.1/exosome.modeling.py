@@ -31,6 +31,7 @@ sampleobjects = []
 
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+simo.state.name = 'Rrp6-Lrp1-Mpp6-exo10 nucleus-localized complex'
 
 # We used Phyre2 to generate a model for Ski7
 simo.add_metadata(IMP.pmi.metadata.Software(
@@ -165,7 +166,8 @@ psi.set_scale(0.05)
 
 # sampling
 
-simo.optimize_floppy_bodies(100)
+if not simo.dry_run:
+    simo.optimize_floppy_bodies(100)
 
 nframes=50000
 if '--test' in sys.argv: nframes=2000
@@ -197,8 +199,23 @@ if '--mmcif' in sys.argv:
     # Add clustering info to the mmCIF file
     os.chdir('../Rrp6.analysis')
     loc = IMP.pmi.metadata.FileLocation('clustering.py',
-                              details='Main clustering and analysis script')
+                      details='Clustering and analysis script for Rrp6 state')
     simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
     with open('clustering.py') as fh:
         exec(fh.read())
+
+    os.chdir('../modeling-scripts_Ski7.1')
+    loc = IMP.pmi.metadata.FileLocation('exosome.modeling.py',
+                              details='Main script for Ski7 state modeling')
+    simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
+    with open('exosome.modeling.py') as fh:
+        exec(fh.read())
+
+    os.chdir('../Ski7.analysis')
+    loc = IMP.pmi.metadata.FileLocation('clustering.py',
+                      details='Clustering and analysis script for Ski7 state')
+    simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
+    with open('clustering.py') as fh:
+        exec(fh.read())
+
     po.flush()
