@@ -29,7 +29,8 @@ sampleobjects = []
 
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
-simo.state.name = 'Ski7-exo10 cytoplasm-localized complex'
+simo.state.short_name = 'Ski7'
+simo.state.long_name = 'Ski7-exo10 cytoplasm-localized complex'
 
 if '--mmcif' in sys.argv:
     simo.add_protocol_output(po)

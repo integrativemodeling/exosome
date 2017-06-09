@@ -31,7 +31,8 @@ sampleobjects = []
 
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
-simo.state.name = 'Rrp6-Lrp1-Mpp6-exo10 nucleus-localized complex'
+simo.state.short_name = 'Rrp6'
+simo.state.long_name = 'Rrp6-Lrp1-Mpp6-exo10 nucleus-localized complex'
 
 # We used Phyre2 to generate a model for Ski7
 simo.add_metadata(IMP.pmi.metadata.Software(
