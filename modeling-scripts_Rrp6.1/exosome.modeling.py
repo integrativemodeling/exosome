@@ -72,6 +72,9 @@ if '--mmcif' in sys.argv:
     # Record the modeling protocol to an mmCIF file
     po = IMP.pmi.mmcif.ProtocolOutput(open('exosome.cif', 'w'))
     simo.add_protocol_output(po)
+    if hasattr(po, 'system'): # po.system needs IMP >= 2.9
+        po.system.title = ('Structure of Saccharomyces cerevisiae exosome '
+                           'determined with CX-MS')
 
 simo.dry_run = '--dry-run' in sys.argv
 
