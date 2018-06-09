@@ -1,0 +1,3 @@
+[submodule "libraries/XL_analysis"]
+	path = libraries/XL_analysis
+	url = https://github.com/salilab/XL_analysis.git
