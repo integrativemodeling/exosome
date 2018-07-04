@@ -29,6 +29,13 @@ sampleobjects = []
 
 m = IMP.Model()
 simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+simo.state.short_name = 'Ski7'
+simo.state.long_name = 'Ski7-exo10 cytoplasm-localized complex'
+
+if '--mmcif' in sys.argv:
+    simo.add_protocol_output(po)
+
+simo.dry_run = '--dry-run' in sys.argv
 
 datadirectory="../data/"
 
@@ -116,8 +123,8 @@ psi.set_scale(0.05)
 # sampling
 
 
-
-simo.optimize_floppy_bodies(100)
+if not simo.dry_run:
+    simo.optimize_floppy_bodies(100)
 
 nframes=50000
 if '--test' in sys.argv: nframes=2000
@@ -141,7 +148,8 @@ mc1=IMP.pmi.macros.ReplicaExchange0(m,
                                     global_output_directory="output",
                                     rmf_dir="rmfs/",
                                     best_pdb_dir="pdbs/",
-                                    replica_stat_file_suffix="stat_replica")
+                                    replica_stat_file_suffix="stat_replica",
+                                    test_mode=simo.dry_run)
 mc1.execute_macro()
 
 

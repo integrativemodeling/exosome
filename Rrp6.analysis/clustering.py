@@ -83,7 +83,7 @@ if '--mmcif' in sys.argv:
                        url="https://zenodo.org/record/583313/"
                            "files/Rrp6-cluster%d.dcd" % i)
         dcds.append(IMP.pmi.metadata.FileLocation(path='.', repo=r,
-                            details="All models in cluster %d" % (i+1)))
+                            details="All Rrp6 models in cluster %d" % (i+1)))
     for po in simo.protocol_output:
         if hasattr(po, 'set_ensemble_file'):
             for i, dcd in enumerate(dcds):
