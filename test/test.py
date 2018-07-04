@@ -19,7 +19,7 @@ class Tests(utils.TestBase):
         # Check size of output file
         with open("exosome.cif") as fh:
             wcl = len(fh.readlines())
-        self.assertEqual(wcl, 66186)
+        self.assertTrue(wcl >= 66180)
 
 if __name__ == '__main__':
     unittest.main()
