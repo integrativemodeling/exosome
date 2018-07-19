@@ -4,8 +4,9 @@ import IMP.algebra
 import IMP.atom
 import IMP.container
 
+import ihm.location
+import ihm.dataset
 import IMP.pmi.mmcif
-import IMP.pmi.metadata
 import IMP.pmi.restraints.crosslinking
 import IMP.pmi.restraints.stereochemistry
 import IMP.pmi.restraints.em
@@ -35,12 +36,12 @@ simo.state.short_name = 'Rrp6'
 simo.state.long_name = 'Rrp6-Lrp1-Mpp6-exo10 nucleus-localized complex'
 
 # We used Phyre2 to generate a model for Ski7
-simo.add_metadata(IMP.pmi.metadata.Software(
+simo.add_metadata(ihm.Software(
           name='Phyre2', classification='protein homology modeling',
           description='Protein Homology/analogY Recognition Engine V 2.0',
           version='2.0',
-          url='http://www.sbg.bio.ic.ac.uk/~phyre2/'))
-simo.add_metadata(IMP.pmi.metadata.Citation(
+          location='http://www.sbg.bio.ic.ac.uk/~phyre2/'))
+simo.add_metadata(ihm.Citation(
           pmid='26436480',
           title="A strategy for dissecting the architectures of native "
                 "macromolecular assemblies.",
@@ -50,7 +51,7 @@ simo.add_metadata(IMP.pmi.metadata.Citation(
                    'Thompson MK', 'Li Y', 'Wang QJ', 'Sali A', 'Rout MP',
                    'Chait BT'],
           doi='10.1038/nmeth.3617'))
-simo.add_metadata(IMP.pmi.metadata.Repository(
+simo.add_metadata(ihm.location.Repository(
           doi="10.5281/zenodo.583313", root="..",
           url="https://zenodo.org/record/583313/files/exosome-v1.0.1.zip",
           top_directory="exosome-v1.0.1"))
@@ -63,7 +64,7 @@ for path, zipfile in [
         ('Ski7.analysis/kmeans_weight_500_2/cluster.1', 'Ski7-cluster1.zip'),
         ('Rrp6.analysis/kmeans_weight_500_2/cluster.0', 'Rrp6-cluster0.zip'),
         ('Rrp6.analysis/kmeans_weight_500_2/cluster.1', 'Rrp6-cluster1.zip')]:
-    simo.add_metadata(IMP.pmi.metadata.Repository(
+    simo.add_metadata(ihm.location.Repository(
           doi="10.5281/zenodo.583313", root="../%s" % path,
           url="https://zenodo.org/record/583313/files/%s" % zipfile,
           top_directory=os.path.basename(path)))
@@ -202,23 +203,23 @@ mc1.execute_macro()
 if '--mmcif' in sys.argv:
     # Add clustering info to the mmCIF file
     os.chdir('../Rrp6.analysis')
-    loc = IMP.pmi.metadata.FileLocation('clustering.py',
+    loc = ihm.location.WorkflowFileLocation('clustering.py',
                       details='Clustering and analysis script for Rrp6 state')
-    simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
+    simo.add_metadata(loc)
     with open('clustering.py') as fh:
         exec(fh.read())
 
     os.chdir('../modeling-scripts_Ski7.1')
-    loc = IMP.pmi.metadata.FileLocation('exosome.modeling.py',
+    loc = ihm.location.WorkflowFileLocation('exosome.modeling.py',
                               details='Main script for Ski7 state modeling')
-    simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
+    simo.add_metadata(loc)
     with open('exosome.modeling.py') as fh:
         exec(fh.read())
 
     os.chdir('../Ski7.analysis')
-    loc = IMP.pmi.metadata.FileLocation('clustering.py',
+    loc = ihm.location.WorkflowFileLocation('clustering.py',
                       details='Clustering and analysis script for Ski7 state')
-    simo.add_metadata(IMP.pmi.metadata.PythonScript(location=loc))
+    simo.add_metadata(loc)
     with open('clustering.py') as fh:
         exec(fh.read())
 

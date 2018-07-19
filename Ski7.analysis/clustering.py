@@ -75,10 +75,10 @@ if '--mmcif' in sys.argv:
     # Point to deposited ensembles in DCD format
     dcds = []
     for i in range(nclusters):
-        r = IMP.pmi.metadata.Repository(doi="10.5281/zenodo.583313",
+        r = ihm.location.Repository(doi="10.5281/zenodo.583313",
                        url="https://zenodo.org/record/583313/"
                            "files/Sik7-cluster%d.dcd" % i)
-        dcds.append(IMP.pmi.metadata.FileLocation(path='.', repo=r,
+        dcds.append(ihm.location.OutputFileLocation(path='.', repo=r,
                             details="All Ski7 models in cluster %d" % (i+1)))
     for po in simo.protocol_output:
         if hasattr(po, 'set_ensemble_file'):
