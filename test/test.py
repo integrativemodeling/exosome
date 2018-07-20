@@ -62,7 +62,7 @@ class Tests(utils.TestBase):
         self.assertEqual(len(xl.cross_links), 216)
         self.assertEqual(xl.dataset.location.path,
                          'exosome-v1.0.1/data/exosome_XLMS_column07012014.csv')
-        self.assertEqual(sum(len(x.fits) for x in xl.cross_links), 864)
+        self.assertEqual(sum(len(x.fits) for x in xl.cross_links), 628)
 
 
 if __name__ == '__main__':
