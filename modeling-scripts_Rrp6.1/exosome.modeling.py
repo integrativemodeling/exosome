@@ -6,16 +6,16 @@ import IMP.container
 
 import ihm.location
 import ihm.dataset
-import IMP.pmi.mmcif
-import IMP.pmi.restraints.crosslinking
-import IMP.pmi.restraints.stereochemistry
-import IMP.pmi.restraints.em
-import IMP.pmi.restraints.basic
-import IMP.pmi.representation
-import IMP.pmi.tools
-import IMP.pmi.samplers
-import IMP.pmi.output
-import IMP.pmi.macros
+import IMP.pmi1.mmcif
+import IMP.pmi1.restraints.crosslinking
+import IMP.pmi1.restraints.stereochemistry
+import IMP.pmi1.restraints.em
+import IMP.pmi1.restraints.basic
+import IMP.pmi1.representation
+import IMP.pmi1.tools
+import IMP.pmi1.samplers
+import IMP.pmi1.output
+import IMP.pmi1.macros
 
 import os
 import sys
@@ -31,7 +31,7 @@ sampleobjects = []
 # setting up topology
 
 m = IMP.Model()
-simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+simo = IMP.pmi1.representation.Representation(m,upperharmonic=True,disorderedlength=False)
 simo.state.short_name = 'Rrp6'
 simo.state.long_name = 'Rrp6-Lrp1-Mpp6-exo10 nucleus-localized complex'
 
@@ -71,7 +71,7 @@ for path, zipfile in [
 
 if '--mmcif' in sys.argv:
     # Record the modeling protocol to an mmCIF file
-    po = IMP.pmi.mmcif.ProtocolOutput(open('exosome.cif', 'w'))
+    po = IMP.pmi1.mmcif.ProtocolOutput(open('exosome.cif', 'w'))
     simo.add_protocol_output(po)
     if hasattr(po, 'system'): # po.system needs IMP >= 2.9
         po.system.title = ('Structure of Saccharomyces cerevisiae exosome '
@@ -107,7 +107,7 @@ domains=[("Dis3",  "Dis3_1",     0.0,     datadirectory+"exosome.fasta", "Dis3",
 
 
 
-bm1=IMP.pmi.macros.BuildModel1(simo)
+bm1=IMP.pmi1.macros.BuildModel1(simo)
 bm1.build_model(domains)
 resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
 
@@ -131,7 +131,7 @@ sampleobjects.append(simo)
 
 # scoring function
 
-ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo,resolution=10)
+ev = IMP.pmi1.restraints.stereochemistry.ExcludedVolumeSphere(simo,resolution=10)
 ev.add_to_model()
 outputobjects.append(ev)
 
@@ -147,10 +147,10 @@ columnmap["XLUniqueID"]="Unique ID"
 rename={"GFP":"Rrp46_gfp","Rrp46":"Rrp46_gfp"}
 offset={"GFP":246}
 
-ids_map=IMP.pmi.tools.map()
+ids_map=IMP.pmi1.tools.map()
 ids_map.set_map_element(1.0,1.0)
 
-xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+xl1 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                    '../data/exosome_XLMS_column07012014.csv',
                                    length=21.0,
                                    slope=0.01,
@@ -176,7 +176,7 @@ if not simo.dry_run:
 
 nframes=50000
 if '--test' in sys.argv: nframes=2000
-mc1=IMP.pmi.macros.ReplicaExchange0(m,
+mc1=IMP.pmi1.macros.ReplicaExchange0(m,
                                     simo,
                                     monte_carlo_sample_objects=sampleobjects,
                                     output_objects=outputobjects,

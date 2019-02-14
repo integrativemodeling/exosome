@@ -6,15 +6,15 @@ import IMP.algebra
 import IMP.atom
 import IMP.container
 
-import IMP.pmi.restraints.crosslinking
-import IMP.pmi.restraints.stereochemistry
-import IMP.pmi.restraints.em
-import IMP.pmi.restraints.basic
-import IMP.pmi.representation
-import IMP.pmi.tools
-import IMP.pmi.samplers
-import IMP.pmi.output
-import IMP.pmi.macros
+import IMP.pmi1.restraints.crosslinking
+import IMP.pmi1.restraints.stereochemistry
+import IMP.pmi1.restraints.em
+import IMP.pmi1.restraints.basic
+import IMP.pmi1.representation
+import IMP.pmi1.tools
+import IMP.pmi1.samplers
+import IMP.pmi1.output
+import IMP.pmi1.macros
 
 import os
 import sys
@@ -38,7 +38,7 @@ class Tests(unittest.TestCase):
         # setting up topology
 
         m = IMP.Model()
-        simo = IMP.pmi.representation.Representation(m,upperharmonic=True,disorderedlength=False)
+        simo = IMP.pmi1.representation.Representation(m,upperharmonic=True,disorderedlength=False)
 
         datadirectory="../data/"
 
@@ -61,7 +61,7 @@ class Tests(unittest.TestCase):
                  ("Rrp43", "Rrp43",      0.9,     datadirectory+"exosome.fasta", "Rrp43", datadirectory+"4IFD.pdb", "C",  (1,-1,0),     None,                    5,       0,         [0],     0,                None,            None, None),
                  ("Ski7",  "Ski7",       0.65,    datadirectory+"exosome.fasta", "Ski7",  datadirectory+"Ski7_3izq_modeller_vmd.pdb", "X",  (1,-1),    None,     5,       2,         [2],     0,                None,            None, None)]
 
-        bm1=IMP.pmi.macros.BuildModel1(simo)
+        bm1=IMP.pmi1.macros.BuildModel1(simo)
         bm1.build_model(domains,rmf_file="../Ski7.analysis/kmeans_weight_500_2/cluster.1/0.rmf3",rmf_frame_number=0)
         resdensities=bm1.get_density_hierarchies([h[1] for h in domains])
 
@@ -76,7 +76,7 @@ class Tests(unittest.TestCase):
 
         # scoring function
 
-        ev = IMP.pmi.restraints.stereochemistry.ExcludedVolumeSphere(simo,resolution=10)
+        ev = IMP.pmi1.restraints.stereochemistry.ExcludedVolumeSphere(simo,resolution=10)
         ev.add_to_model()
         outputobjects.append(ev)
 
@@ -91,10 +91,10 @@ class Tests(unittest.TestCase):
         rename={"GFP":"Rrp46_gfp","Rrp46":"Rrp46_gfp"}
         offset={"GFP":246}
 
-        ids_map=IMP.pmi.tools.map()
+        ids_map=IMP.pmi1.tools.map()
         ids_map.set_map_element(1.0,1.0)
 
-        xl1 = IMP.pmi.restraints.crosslinking.ISDCrossLinkMS(simo,
+        xl1 = IMP.pmi1.restraints.crosslinking.ISDCrossLinkMS(simo,
                                            '../data/exosome_XLMS_column07012014.csv',
                                            length=21.0,
                                            slope=0.01,
@@ -112,7 +112,7 @@ class Tests(unittest.TestCase):
         psi=xl1.get_psi(1.0)[0]
         psi.set_scale(0.05)
 
-        o=IMP.pmi.output.Output()
+        o=IMP.pmi1.output.Output()
         #o.write_test("test.Ski7.out",[simo,xl1,ev])
         o.test("test.Ski7.out",[simo,xl1,ev])
 
