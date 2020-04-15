@@ -6,6 +6,10 @@ import IMP.container
 
 import ihm.location
 import ihm.dataset
+try:
+    import ihm.reference
+except ImportError:
+    pass
 import IMP.pmi1.mmcif
 import IMP.pmi1.restraints.crosslinking
 import IMP.pmi1.restraints.stereochemistry
@@ -222,5 +226,28 @@ if '--mmcif' in sys.argv:
     simo.add_metadata(loc)
     with open('clustering.py') as fh:
         exec(fh.read())
+
+    # Link entities to UniProt
+    if hasattr(ihm, 'reference'):
+        lpep = ihm.LPeptideAlphabet()
+        sd_dis3 = [ihm.reference.SeqDif(171, lpep['D'], lpep['N']),
+                   ihm.reference.SeqDif(551, lpep['D'], lpep['N'])]
+        sd_mtr3 = [ihm.reference.SeqDif(75, lpep['T'], lpep['S'])]
+        sd_rrp42 = [ihm.reference.SeqDif(138, lpep['V'], lpep['I'])]
+        sd_rrp43 = [ihm.reference.SeqDif(363, lpep['V'], lpep['M'])]
+        sd_rrp6 = [ihm.reference.SeqDif(127, lpep['K'], lpep['G']),
+                   ihm.reference.SeqDif(128, lpep['R'], lpep['M']),
+                   ihm.reference.SeqDif(361, lpep['Y'], lpep['A'])]
+        for subunit, accession, seq_dif in (
+                ('Dis3', 'Q08162', sd_dis3), ('Rrp45', 'Q05636', []),
+                ('Rrp4', 'P38792', []), ('Csl4', 'P53859', []),
+                ('Mtr3', 'P48240', sd_mtr3), ('Rrp40', 'Q08285', []),
+                ('Rrp42', 'Q12277', sd_rrp42), ('Ski6', 'P46948', []),
+                ('Rrp46_gfp', 'P53256', []), ('Rrp43', 'P25359', sd_rrp43),
+                ('Lrp1', 'P38801', []), ('Rrp6', 'Q12149', sd_rrp6),
+                ('MPP6', 'P53725', []), ('Ski7', 'Q08491', [])):
+            ref = ihm.reference.UniProtSequence.from_accession(accession)
+            ref.alignments.append(ihm.reference.Alignment(seq_dif=seq_dif))
+            e = po.asym_units[subunit].entity.references.append(ref)
 
     po.flush()
