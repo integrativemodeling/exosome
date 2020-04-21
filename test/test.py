@@ -15,8 +15,13 @@ class Tests(utils.TestBase):
         os.chdir(os.path.join(TOPDIR, 'modeling-scripts_Rrp6.1'))
         if os.path.exists("exosome.cif"):
             os.unlink("exosome.cif")
+        # Potentially override methods that need network access
+        env = os.environ.copy()
+        env['PYTHONPATH'] = os.path.join(TOPDIR, 'test', 'mock') \
+                            + ':' + env.get('PYTHONPATH', '')
         p = subprocess.check_call(
-                ["python", "exosome.modeling.py", "--mmcif", "--dry-run"])
+                ["python", "exosome.modeling.py", "--mmcif", "--dry-run"],
+                env=env)
         # Check output file
         self._check_mmcif_file('exosome.cif')
 
