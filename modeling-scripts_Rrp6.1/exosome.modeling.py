@@ -10,6 +10,10 @@ try:
     import ihm.reference
 except ImportError:
     pass
+try:
+    import ihm.citations
+except ImportError:
+    pass
 import IMP.pmi1.mmcif
 import IMP.pmi1.restraints.crosslinking
 import IMP.pmi1.restraints.stereochemistry
@@ -40,11 +44,15 @@ simo.state.short_name = 'Rrp6'
 simo.state.long_name = 'Rrp6-Lrp1-Mpp6-exo10 nucleus-localized complex'
 
 # We used Phyre2 to generate a model for Ski7
-simo.add_metadata(ihm.Software(
+s = ihm.Software(
           name='Phyre2', classification='protein homology modeling',
           description='Protein Homology/analogY Recognition Engine V 2.0',
           version='2.0',
-          location='http://www.sbg.bio.ic.ac.uk/~phyre2/'))
+          location='http://www.sbg.bio.ic.ac.uk/~phyre2/')
+if hasattr(ihm, 'citations'):
+    s.citation = ihm.citations.phyre2
+simo.add_metadata(s)
+
 simo.add_metadata(ihm.Citation(
           pmid='26436480',
           title="A strategy for dissecting the architectures of native "
