@@ -28,7 +28,7 @@ class Tests(utils.TestBase):
     def _check_mmcif_file(self, fname):
         with open(fname) as fh:
             s, = ihm.reader.read(fh)
-        self.assertEqual(len(s.citations), 1)
+        self.assertEqual(len(s.citations), 4)
         self.assertEqual(len(s.software), 3)
         self.assertEqual(len(s.orphan_starting_models), 14)
         # Should be 2 states
